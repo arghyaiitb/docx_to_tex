@@ -1,12 +1,13 @@
+from LatexDefinition import LatexFormatting as lf
+
 class DocxReading(object):
     def __init__(self):
         ParaReading.__init__(self)
 
-
     def chapter_execute(self, chapter):
         processed_chapter = ''
         for para in chapter.paragraphs:
-            processed_chapter = ''.join([processed_chapter,ParaReading().run_execute(para)])
+            processed_chapter = ''.join([processed_chapter,ParaReading().run_execute(para), '\par \n'])
         return processed_chapter
 
 
@@ -18,7 +19,7 @@ class ParaReading(object):
         processed_run = ''
         for run in para.runs:
             processed_run = ''.join([processed_run,FormattingChecks().b_i_u(run)])
-        return 'a'
+        return processed_run
 
 class FormattingChecks(object):
 
@@ -27,12 +28,12 @@ class FormattingChecks(object):
 
     def b_i_u(self, words):
         """Bold Italic and Underline checks are performed"""
-
+        final_word = words.text
         if words.bold:
-            print(words.text)
+            final_word = lf().basic_format('textbf', final_word)
         if words.italic:
-            print(words.text)
+            final_word = lf().basic_format('textit', final_word)
         if words.underline:
-            print(words.text)
-        return 'a'
+            final_word = lf().basic_format('underline', final_word)
+        return final_word
 
