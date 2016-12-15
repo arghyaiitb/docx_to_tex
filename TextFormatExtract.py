@@ -1,11 +1,12 @@
 from LatexDefinition import LatexFormatting as lf
+from LatexDefinition import  DocumentHeader as dh
 
 class DocxReading(object):
     def __init__(self):
         ParaReading.__init__(self)
 
     def chapter_execute(self, chapter):
-        processed_chapter = ''
+        processed_chapter = '\\justify\n'
         for para in chapter.paragraphs:
             processed_chapter = ''.join([processed_chapter,ParaReading().run_execute(para), '\par \n'])
         return processed_chapter
@@ -28,7 +29,9 @@ class FormattingChecks(object):
 
     def b_i_u(self, words):
         """Bold Italic and Underline checks are performed"""
-        final_word = words.text
+        final_word = words.text.replace('&','\&').replace('%','\%')
+        if '*' in words.text:
+            final_word = dh().parent_header(['center','****'])
         if words.bold:
             final_word = lf().basic_format('textbf', final_word)
         if words.italic:

@@ -6,7 +6,7 @@ from collections import namedtuple as nt
 root = Tk()
 chapter_details = nt('chapter_details', 'C_Name C_loc', rename=True)
 story_details = nt('story_details', 'Title Author Edition', rename=True)
-book_details = nt('book_details', 'Page_width Page_height Page_margin')
+book_details = nt('book_details', 'Page_width Page_height Bottom Inner_margin Outer_margin')
 
 chapter_det = []
 class Application(Frame):
@@ -30,17 +30,29 @@ class Application(Frame):
         # print
 
     def page_wid(self):
-        ns = simpledialog.askstring('Page width', 'The fat one')
+        ns = simpledialog.askstring('Page width', 'Book page')
         self.page_hei(ns)
 
     def page_hei(self, page_width):
-        ns = simpledialog.askstring('Page Height', 'The tall one')
-        self.page_mar(page_width, ns)
+        ns = simpledialog.askstring('Page Height', 'Book page')
+        self.inner_mar(page_width, ns)
 
-    def page_mar(self, page_width, page_height):
-        ns = simpledialog.askstring('Page Margin', 'Limit kya hai')
+    def inner_mar(self, page_width, page_height):
+        ns = simpledialog.askstring('Inner Margin', 'Limit kya hai')
+        self.outer_mar(page_width, page_height, ns)
+
+    def outer_mar(self, page_width, page_height, inner_margin):
+        ns = simpledialog.askstring('Outer Margin', 'Limit kya hai')
+        self.paragraph_margin(page_width, page_height, inner_margin, ns)
+
+    def paragraph_margin(self, page_width, page_height, inner_margin, outer_margin):
+        ns = simpledialog.askstring('Bottom margin', 'Jaldi bol')
         global book_det
-        book_det = book_details(Page_width=page_width, Page_height=page_height, Page_margin=ns)
+        book_det = book_details(Page_width=page_width,
+                                Page_height=page_height,
+                                Inner_margin=inner_margin,
+                                Outer_margin=outer_margin,
+                                Bottom=ns)
 
     def chapter_name(self):
         ns= simpledialog.askstring('Chapter Name','Just Name')
@@ -55,8 +67,11 @@ class Application(Frame):
     def no_action(self):
         print('Chill hai')
 
+    def font_option(self, font):
+        print (font)
+
     def main(self):
-        root.title("docx_2_tex v0.1")
+        root.title("docx_2_tex v0.2")
         label = ttk.Label(root, text="docx_2_tex", foreground="maroon", font=("Times", 30,"bold"))
         label.pack()
 
@@ -85,29 +100,32 @@ class Application(Frame):
         # button1 = Button(root, text="Add Chapter", command=self.chapter_name, bg="Blue",fg="white")
         # button1.place(relx=.87, rely=0.75, anchor=CENTER)
 
-        button3 = Button(root, text="Story Details", command=self.title, bg="Blue", fg="white")
-        button3.place(relx=.90, rely=0.15, anchor=CENTER)
+        button1 = Button(root, text="Story Details", command=self.title, bg="Blue", fg="white")
+        button1.place(relx=.90, rely=0.15, anchor=CENTER)
 
-        button3 = Button(root, text="Page Settings", command=self.page_wid, bg="Blue", fg="white")
-        button3.place(relx=.90, rely=0.35, anchor=CENTER)
+        button2 = Button(root, text="Page Settings", command=self.page_wid, bg="Blue", fg="white")
+        button2.place(relx=.90, rely=0.35, anchor=CENTER)
 
-        button2 = Button(root, text="Add Chapter", command=self.chapter_name, bg="Blue",fg="white")
-        button2.place(relx=.90, rely=0.55, anchor=CENTER)
+        button3 = Button(root, text="Add Chapter", command=self.chapter_name, bg="Blue",fg="white")
+        button3.place(relx=.90, rely=0.55, anchor=CENTER)
 
         button4 = Button(root, height=2, width=10, text="exit", command=lambda: exit(),bg="red" ,font=("Times",13,"bold"))
         button4.place(relx=.13, rely=0.75, anchor=CENTER)
 
-        button1 = Button(root, text="Process", command=self.no_action, bg="Blue",fg="white")
-        button1.place(relx=.90, rely=0.75, anchor=CENTER)
+        button5 = Button(root, text="Process", command=self.no_action, bg="Blue",fg="white")
+        button5.place(relx=.90, rely=0.75, anchor=CENTER)
 
-
+        options = ["1", "2", "3"]
+        # var =
+        drop = OptionMenu(root, StringVar(), *options, command= self.font_option)
+        drop.place(relx=.50, rely=0.55, anchor=CENTER)
 
 
 def gui_func():
-    img = PhotoImage(file="story_mirror_logo.png")
-    panel = Label(root, image=img)
-    panel.place(relx=0.5, rely=0.5, anchor=CENTER)
-    panel.pack(side="bottom", fill="both", expand="yes")
+    # img = PhotoImage(file="story_mirror_logo.png")
+    # panel = Label(root, image=img)
+    # panel.place(relx=0.5, rely=0.5, anchor=CENTER)
+    # panel.pack(side="bottom", fill="both", expand="yes")
 
     app = Application(master=root)
     app.mainloop()
