@@ -8,8 +8,3 @@ class OpenDocFile(object):
     def openfile(self, filename):
         document = docx.Document(filename)
         return document
-
-    
-
-
-

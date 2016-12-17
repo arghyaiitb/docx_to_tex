@@ -19,27 +19,6 @@ class AboutTheBook(object):
         return values
 
 
-class BookDimensions(object):
-    def __init__(self):
-        self
-
-    def page_width(self):
-        return input('Please enter the width of the pages: ')
-
-    def page_height(self):
-        return  input('Please enter the height of the pages: ')
-
-    def page_margin(self):
-        return input('Please enter the top margin of the document: ')
-
-    def page_bottom_margin(self):
-        return input('Please enter the bottom margin of the document: ')
-
-    def get_all_values(self, book):
-        values =self.page_width(book.Page_width), self.page_height(book.Page_height), self.page_margin(book.Page_margin)
-        return values
-
-
 class BookContent(object):
     def __init__(self):
         self

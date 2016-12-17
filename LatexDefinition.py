@@ -56,7 +56,12 @@ class LatexFormatting(object):
 class LatexPackages(object):
 
     def __init__(self):
-        self.package_without_para = ['fancyhdr', 'fourier-orns', 'fontspec', 'lmodern', 'mathptmx', 'scrextend']
+        self.package_without_para = ['fancyhdr',
+                                     'fourier-orns',
+                                     'fontspec',
+                                     'lmodern',
+                                     'mathptmx',
+                                     'scrextend']
 
         self.package_with_para = {'ragged2e': 'document',
                                   'fontenc': 'T1',
@@ -70,6 +75,3 @@ class LatexPackages(object):
         for p in self.package_with_para:
             result = '\n'.join([result, DocumentHeader.usepackage_with_parameters(p, self.package_with_para[p])])
         return result
-
-
-

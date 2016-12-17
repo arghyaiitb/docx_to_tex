@@ -22,6 +22,7 @@ class ParaReading(object):
             processed_run = ''.join([processed_run,FormattingChecks().b_i_u(run)])
         return processed_run
 
+
 class FormattingChecks(object):
 
     def __init__(self):
@@ -29,7 +30,7 @@ class FormattingChecks(object):
 
     def b_i_u(self, words):
         """Bold Italic and Underline checks are performed"""
-        final_word = words.text.replace('&','\&').replace('%','\%')
+        final_word = words.text.replace('&','\&').replace('%','\%').replace('$','\$').replace('#','\#')
         if '*' in words.text:
             final_word = dh().parent_header(['center','****'])
         if words.bold:
@@ -39,4 +40,3 @@ class FormattingChecks(object):
         if words.underline:
             final_word = lf().basic_format('underline', final_word)
         return final_word
-
