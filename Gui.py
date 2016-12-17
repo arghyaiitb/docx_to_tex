@@ -77,7 +77,7 @@ class Application(Frame):
 
 
     def no_action(self):
-        label1 = Label(Toplevel(), text='peace maro \n argo will put it in next version',)
+        label1 = Label(Toplevel(), text='peace maro \n argo will put it in next version (arghyasaha26@gmail.com)',)
         label1.pack()
 
     def font_option(self, font):
@@ -176,10 +176,6 @@ class Application(Frame):
 
 
 def gui_func():
-    # img = PhotoImage(file="story_mirror_logo.png")
-    # panel = Label(root, image=img)
-    # panel.place(relx=0.5, rely=0.5, anchor=CENTER)
-    # panel.pack(side="bottom", fill="both", expand="yes")
 
     app = Application(master=root)
     app.mainloop()
